@@ -2,37 +2,55 @@ const btn = document.getElementById("btn");
 const input = document.getElementById("ip");
 const output = document.getElementById("output");
 
-function delay(time, value) {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(value), time);
-  });
-}
-
 btn.addEventListener("click", () => {
 
-  let number = Number(input.value);
+  const number = Number(input.value);
 
-  // First Promise (2 sec)
-  delay(2000, number)
+  new Promise((resolve) => {
+    setTimeout(() => {
+      output.textContent = `Result: ${number}`;
+      resolve(number);
+    }, 2000);
+  })
 
-    .then(num => {
-      output.textContent = `Result: ${num}`;
-      return delay(1000, num * 2);   // 1 sec
-    })
-
-    .then(num => {
-      output.textContent = `Result: ${num}`;
-      return delay(1000, num - 3);   // 1 sec
-    })
-
-    .then(num => {
-      output.textContent = `Result: ${num}`;
-      return delay(1000, num / 2);   // 1 sec
-    })
-
-    .then(num => {
-      const final = num + 10;
-      output.textContent = `Final Result: ${final}`;
+  .then(num => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const result = num * 2;
+        output.textContent = `Result: ${result}`;
+        resolve(result);
+      }, 1000);
     });
+  })
+
+  .then(num => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const result = num - 3;
+        output.textContent = `Result: ${result}`;
+        resolve(result);
+      }, 1000);
+    });
+  })
+
+  .then(num => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const result = num / 2;
+        output.textContent = `Result: ${result}`;
+        resolve(result);
+      }, 1000);
+    });
+  })
+
+  .then(num => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const final = num + 10;
+        output.textContent = `Final Result: ${final}`;
+        resolve(final);
+      }, 1000);
+    });
+  });
 
 });
