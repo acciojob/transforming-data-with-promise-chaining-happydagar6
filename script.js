@@ -12,21 +12,22 @@ btn.addEventListener("click", () => {
 
   let number = Number(input.value);
 
+  // First Promise (2 sec)
   delay(2000, number)
 
     .then(num => {
       output.textContent = `Result: ${num}`;
-      return delay(2000, num * 2);
+      return delay(1000, num * 2);   // 1 sec
     })
 
     .then(num => {
       output.textContent = `Result: ${num}`;
-      return delay(1000, num - 3);
+      return delay(1000, num - 3);   // 1 sec
     })
 
     .then(num => {
       output.textContent = `Result: ${num}`;
-      return delay(1000, num / 2);
+      return delay(1000, num / 2);   // 1 sec
     })
 
     .then(num => {
